@@ -3,8 +3,11 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.text.ParseException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.commons.cli.*;
 
 public class Main {
 
@@ -12,9 +15,20 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("** Starting Maze Runner");
+
+        Options options = new Options();
+        options.addOption("i", true, "the provided maze's path from file");
+
+        CommandLineParser parser = new DefaultParser();
+
+
         try {
-            System.out.println("**** Reading the maze from file " + args[0]);
-            BufferedReader reader = new BufferedReader(new FileReader(args[0]));
+            CommandLine cmd = parser.parse(options, args);
+            String mazeFile = cmd.getOptionValue("i"); 
+
+
+            System.out.println("**** Reading the maze from file " + mazeFile);
+            BufferedReader reader = new BufferedReader(new FileReader(mazeFile));
             String line;
             while ((line = reader.readLine()) != null) {
                 for (int idx = 0; idx < line.length(); idx++) {
