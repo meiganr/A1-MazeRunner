@@ -53,6 +53,22 @@ public class Maze {
         }
     }
 
+    public boolean move(String position){
+        return false; 
+    }
+    public boolean turn(String direction){
+        return false; 
+
+    }
+    public String getStartPosition(){
+        return null; 
+
+    }
+    public String getEndPosition(){
+        return null;
+
+    }
+
 
     
 }
