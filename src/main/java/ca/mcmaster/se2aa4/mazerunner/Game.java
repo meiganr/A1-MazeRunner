@@ -72,11 +72,12 @@ public class Game {
 
 
 
+        logger.info(maze.getStartPosition());
+        logger.info(maze.getEndPosition());
 
         logger.info("**** Computing path\n");
         logger.info("PATH NOT COMPUTED\n");
         logger.info("** End of MazeRunner\n");
-
     }
 
 

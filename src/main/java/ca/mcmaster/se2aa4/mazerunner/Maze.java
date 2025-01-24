@@ -16,8 +16,8 @@ public class Maze {
     private File mazeFile;
     private char[][] maze;
 
-    private String startPosition;
-    private String endPosition;
+    private String startCoordinate;
+    private String endCoordinate;
 
     EntryAndExit entryAndExit;
 
@@ -30,18 +30,18 @@ public class Maze {
         createMaze();
 
         entryAndExit = new EntryAndExit(maze, rows, cols);
-        setStartAndEndPosition();
+        setStartAndEndCoordinates();
     }
 
-    private void setStartAndEndPosition(){
-        startPosition = entryAndExit.getEntry();
-        endPosition = entryAndExit.getExit();
+    private void setStartAndEndCoordinates(){
+        startCoordinate = entryAndExit.getEntryCoordinate();
+        endCoordinate = entryAndExit.getExitCoordinate();
     }
     public String getStartPosition(){
-        return startPosition;
+        return startCoordinate;
     }
     public String getEndPosition(){
-        return endPosition;
+        return endCoordinate;
     }
 
     private void createMaze(){
