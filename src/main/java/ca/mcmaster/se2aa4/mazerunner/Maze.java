@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.*;
 
+import main.java.ca.mcmaster.se2aa4.mazerunner.EntryAndExit;
 
 public class Maze {
     private File mazeFile;
@@ -17,6 +18,9 @@ public class Maze {
 
     private String startPosition;
     private String endPosition;
+
+    EntryAndExit entryAndExit;
+
  
     private static final Logger logger = LogManager.getLogger();
 
@@ -24,6 +28,20 @@ public class Maze {
         this.mazeFile = mazeFile;
         maze = new char[rows][cols];
         createMaze();
+
+        entryAndExit = new EntryAndExit(maze, rows, cols);
+        setStartAndEndPosition();
+    }
+
+    private void setStartAndEndPosition(){
+        startPosition = entryAndExit.getEntry();
+        endPosition = entryAndExit.getExit();
+    }
+    public String getStartPosition(){
+        return startPosition;
+    }
+    public String getEndPosition(){
+        return endPosition;
     }
 
     private void createMaze(){
@@ -60,15 +78,5 @@ public class Maze {
         return false; 
 
     }
-    public String getStartPosition(){
-        return null; 
 
-    }
-    public String getEndPosition(){
-        return null;
-
-    }
-
-
-    
 }
