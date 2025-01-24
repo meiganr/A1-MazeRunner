@@ -9,21 +9,29 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.*;
 
-public class Strategy {
+public abstract class Strategy {
 
-    private String currentX; 
-    private String currentY; 
+    private int currentXIndex;
+    private int currentYIndex;
 
-    public Strategy(){
-        currentX = "0"; 
-        currentY = "0"; 
+    protected Strategy(int currentXIndex, int currentYIndex){
+        this.currentXIndex = currentXIndex;
+        this.currentYIndex = currentYIndex;
+    }
+    protected void setCurrentXIndex(int newPos){
+        currentXIndex = newPos;
+    }
+    protected void setCurrentYIndex(int newPos){
+        currentYIndex = newPos;
+    }
+    public int getCurrentXIndex(){
+        return currentXIndex;
+    }
+    public int getCurrentYIndex(){
+        return currentYIndex;
     }
 
-    public String decideNext(char[][] maze, String position){
+    public abstract String decideNext(char[][] maze, String position);
 
-        return null; 
-
-    }
-
-    
 }
+
