@@ -37,11 +37,15 @@ public class Maze {
         startCoordinate = entryAndExit.getEntryCoordinate();
         endCoordinate = entryAndExit.getExitCoordinate();
     }
-    public String getStartPosition(){
+    public String getStartCoordinate(){
         return startCoordinate;
     }
-    public String getEndPosition(){
+    public String getEndCoordinate(){
         return endCoordinate;
+    }
+
+    public char[][] getMaze(){
+        return maze;
     }
 
     private void createMaze(){
@@ -70,13 +74,4 @@ public class Maze {
             logger.debug(' ');
         }
     }
-
-    public boolean move(String position){
-        return false; 
-    }
-    public boolean turn(String direction){
-        return false; 
-
-    }
-
 }

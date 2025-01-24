@@ -11,27 +11,34 @@ import org.apache.commons.cli.*;
 
 public abstract class Strategy {
 
-    private int currentXIndex;
-    private int currentYIndex;
+    protected int currentXIndex;
+    protected int currentYIndex;
+    protected String stepTaken;
 
-    protected Strategy(int currentXIndex, int currentYIndex){
-        this.currentXIndex = currentXIndex;
-        this.currentYIndex = currentYIndex;
+    protected Strategy(String coordinate){
+        setCurrentXAndYIndex(coordinate);
+        stepTaken = null;
     }
-    protected void setCurrentXIndex(int newPos){
-        currentXIndex = newPos;
+
+    protected void setCurrentXAndYIndex(String coordinate){
+        currentXIndex = Integer.parseInt(coordinate.substring(0,1));
+        currentYIndex = Integer.parseInt(coordinate.substring(2));
     }
-    protected void setCurrentYIndex(int newPos){
-        currentYIndex = newPos;
-    }
+   
     public int getCurrentXIndex(){
         return currentXIndex;
     }
     public int getCurrentYIndex(){
         return currentYIndex;
     }
+    protected void setStepTaken(String stepTaken){
+        this.stepTaken = stepTaken;
+    }
+    public String getStepTaken(){
+        return stepTaken;
+    }
 
-    public abstract String decideNext(char[][] maze, String position);
+    public abstract String decideNextMove(char[][] maze, String coordinate);
 
 }
 

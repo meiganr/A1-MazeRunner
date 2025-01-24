@@ -11,6 +11,7 @@ import org.apache.commons.cli.*;
 import java.util.*; 
 
 public class Position {
+    private static final Logger logger = LogManager.getLogger();
 
     private String currentCoordinate;
     private ArrayList<String> canonicalPath;
@@ -18,12 +19,17 @@ public class Position {
     private String reversedPath;
 
     public Position(String coordinate){
-        
+        currentCoordinate = coordinate;
+        canonicalPath = new ArrayList<>();
     }
     
     public boolean reachedEnd(String endCoordinate){
+        if (currentCoordinate.equals(endCoordinate)){
+            return true;
+        }
         return false; 
     }
+
     public void setCurrentCoordinate(String coordinate){
         currentCoordinate = coordinate;
     }
@@ -32,7 +38,15 @@ public class Position {
     }
 
     public void addStepToPath(String stepTaken){
-        
+         if (stepTaken.equals("FORWARD")){
+            canonicalPath.add("F");
+        }
+        else if (stepTaken.equals("TURN RIGHT")){
+            canonicalPath.add("R");
+        }
+        else if (stepTaken.equals("TURN LEFT")){
+            canonicalPath.add("L");
+        }
     }
     public void makeFactorizedPath(){
         
@@ -42,6 +56,9 @@ public class Position {
     }
     public void printCanonicalPath(){
         
+        for (int i = 0; i < canonicalPath.size(); i++){
+            logger.info(canonicalPath.get(i));
+        }
     }
     public void reversePath(){
 
