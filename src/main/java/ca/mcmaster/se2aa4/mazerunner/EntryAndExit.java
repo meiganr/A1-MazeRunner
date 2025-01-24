@@ -12,8 +12,8 @@ import org.apache.commons.cli.*;
 
 public class EntryAndExit {
     private char[][] maze;
-    private String entry;
-    private String exit;
+    private String entryCoordinate;
+    private String exitCoordinate;
     private int rows;
     private int cols;
 
@@ -22,32 +22,32 @@ public class EntryAndExit {
         this.maze = maze;
         this.rows = rows;
         this.cols = cols;
-        findEntry();
-        findExit();
+        findEntryCoordinate();
+        findExitCoordinate();
     }
 
-    private void findEntry(){
+    private void findEntryCoordinate(){
         for (int i = 0; i < rows; i++){
             if (maze[i][0] == ' '){
-                entry = String.valueOf(i);
+                entryCoordinate = String.valueOf(i);
             }
         }
-        entry = entry + ",0";
+        entryCoordinate = entryCoordinate + ",0";
     }
-    private void findExit(){
+    private void findExitCoordinate(){
         for (int i = 0; i < rows; i++){
             if (maze[i][cols - 1] == ' '){
-                exit = String.valueOf(i);
+                exitCoordinate = String.valueOf(i);
             }
         }
-        exit = exit + "," + String.valueOf(cols - 1);
+        exitCoordinate = exitCoordinate + "," + String.valueOf(cols - 1);
     }
 
-    public String getEntry(){
-        return entry;
+    public String getEntryCoordinate(){
+        return entryCoordinate;
     }
-    public String getExit(){
-        return exit;
+    public String getExitCoordinate(){
+        return exitCoordinate;
     }
 
 
