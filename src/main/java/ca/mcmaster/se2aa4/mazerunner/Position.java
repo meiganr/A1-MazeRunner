@@ -23,6 +23,7 @@ public class Position {
         canonicalPath = new ArrayList<>();
     }
     
+    // checked if reached the end of the maze
     public boolean reachedEnd(String endCoordinate){
         if (currentCoordinate.equals(endCoordinate)){
             return true;
@@ -57,8 +58,9 @@ public class Position {
     public void printCanonicalPath(){
         
         for (int i = 0; i < canonicalPath.size(); i++){
-            logger.info(canonicalPath.get(i));
+            System.out.print(canonicalPath.get(i));
         }
+        System.out.println(); 
     }
     public void reversePath(){
 

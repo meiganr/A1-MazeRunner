@@ -37,9 +37,11 @@ public class Maze {
         startCoordinate = entryAndExit.getEntryCoordinate();
         endCoordinate = entryAndExit.getExitCoordinate();
     }
+
     public String getStartCoordinate(){
         return startCoordinate;
     }
+    
     public String getEndCoordinate(){
         return endCoordinate;
     }
@@ -64,14 +66,15 @@ public class Maze {
         } catch (IOException e) {
             logger.error("/!\\ An error has occured /!\\");
         }
+        printMaze(); 
     }
     
     private void printMaze(){
         for (int i = 0; i < maze.length; i++){
             for (int j = 0; j < maze.length; j++){
-                logger.debug(maze[i][j]);
+                System.out.print(maze[i][j]);
             }
-            logger.debug(' ');
+            System.out.println(' ');
         }
     }
 }

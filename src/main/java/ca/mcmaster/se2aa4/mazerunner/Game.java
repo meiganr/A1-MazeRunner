@@ -33,7 +33,7 @@ public class Game {
         if (strategyOption == 1){
             strategy = new StraightStrategy(maze.getStartCoordinate());
         }
-                
+
         position = new Position(maze.getStartCoordinate());
     }
 
@@ -58,6 +58,7 @@ public class Game {
             int rows = 0;
             int cols = 0;
 
+            // finding the number of rows and cols
             while ((line = reader.readLine()) != null) {
                 rows++;
                 cols = line.length();
@@ -85,8 +86,8 @@ public class Game {
 
         String nextCoordinate;
 
-        while (position.reachedEnd(maze.getEndCoordinate()) == false){
-            nextCoordinate = strategy.decideNextMove(maze.getMaze(), position.getCurrentCoordinate());
+        while (position.reachedEnd(maze.getEndCoordinate()) == false){ // while not at the end of the maze
+            nextCoordinate = strategy.decideNextMove(maze.getMaze(), position.getCurrentCoordinate()); // get next coordinate
 
             if (nextCoordinate.equals(null)){
 
@@ -97,11 +98,11 @@ public class Game {
             }
         }
 
-        logger.info("**** Computing path\n");
+        logger.info("**** Computing path");
         position.printCanonicalPath();
         
-        logger.debug("PATH NOT COMPUTED\n");
-        logger.info("** End of MazeRunner\n");
+        logger.debug("PATH NOT COMPUTED");
+        logger.info("** End of MazeRunner");
     }
 
 
