@@ -12,19 +12,27 @@ import java.util.*;
 
 public class Position {
 
-    private String currentPos;
+    private String currentCoordinate;
     private ArrayList<String> canonicalPath;
-    private String factorizedPath; 
-    
-    
-    public boolean reachedEnd(){
-        return false; 
-    }
-    public void setCurrentPos(String pos){
+    private String factorizedPath;
+    private String reversedPath;
+
+    public Position(String coordinate){
         
     }
-    public String getCurrentPos(){
-        return null; 
+    
+    public boolean reachedEnd(String endCoordinate){
+        return false; 
+    }
+    public void setCurrentCoordinate(String coordinate){
+        currentCoordinate = coordinate;
+    }
+    public String getCurrentCoordinate(){
+        return currentCoordinate;
+    }
+
+    public void addStepToPath(String stepTaken){
+        
     }
     public void makeFactorizedPath(){
         
@@ -34,5 +42,8 @@ public class Position {
     }
     public void printCanonicalPath(){
         
+    }
+    public void reversePath(){
+
     }
 }
