@@ -5,15 +5,14 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.text.ParseException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import main.java.ca.mcmaster.se2aa4.mazerunner.Maze;
-import main.java.ca.mcmaster.se2aa4.mazerunner.Strategy;
-import main.java.ca.mcmaster.se2aa4.mazerunner.Position;
-import main.java.ca.mcmaster.se2aa4.mazerunner.StraightStrategy;
+// import main.java.ca.mcmaster.se2aa4.mazerunner.Maze;
+// import main.java.ca.mcmaster.se2aa4.mazerunner.Strategy;
+// import main.java.ca.mcmaster.se2aa4.mazerunner.Position;
+// import main.java.ca.mcmaster.se2aa4.mazerunner.StraightStrategy;
 
 import org.apache.commons.cli.*;
 
@@ -25,7 +24,6 @@ public class Game {
     private Maze maze;
     private String mazeName;
     private File mazeFile;
-    private Position position;
 
     public Game(String[] args, int strategyOption){
         makeMaze(args);
@@ -33,8 +31,10 @@ public class Game {
         if (strategyOption == 1){
             strategy = new StraightStrategy(maze.getStartCoordinate());
         }
-
-        position = new Position(maze.getStartCoordinate());
+        else if (strategyOption == 2){
+            strategy = new StraightStrategy(maze.getStartCoordinate());
+        }
+        
     }
 
     private void makeMaze(String[] args){
@@ -85,21 +85,22 @@ public class Game {
     public void runMaze(){
 
         String nextCoordinate;
+        String currentCoordinate = maze.getCurrentCoordinate(); 
 
-        while (position.reachedEnd(maze.getEndCoordinate()) == false){ // while not at the end of the maze
-            nextCoordinate = strategy.decideNextMove(maze.getMaze(), position.getCurrentCoordinate()); // get next coordinate
+        while (maze.reachedEndOfMaze() == false){ // while not at the end of the maze
+            nextCoordinate = strategy.decideNextMove(maze.getMaze(), currentCoordinate); // get next coordinate
 
             if (nextCoordinate.equals(null)){
-
+                // do noting
             }
             else{
-                position.setCurrentCoordinate(nextCoordinate); // set as new current coordinate
-                position.addStepToPath(strategy.getStepTaken());
+                maze.setNewCoordinates(nextCoordinate, strategy.getStepTaken());
             }
         }
 
         logger.info("**** Computing path");
-        position.printCanonicalPath();
+        System.out.println("Printing paths");
+        maze.printPaths();
         
         logger.debug("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
@@ -107,8 +108,9 @@ public class Game {
 
 
     public static void main(String[] args) {
-        Game g = new Game(args,1);
+        Game g = new Game(args,2);
         g.runMaze();
     
     }
 }
+

@@ -1,16 +1,15 @@
-package main.java.ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.*;
 
-import main.java.ca.mcmaster.se2aa4.mazerunner.EntryAndExit;
+ //import main.java.ca.mcmaster.se2aa4.mazerunner.EntryAndExit;
 
 public class Maze {
     private File mazeFile;
@@ -21,6 +20,7 @@ public class Maze {
 
     EntryAndExit entryAndExit;
 
+    private Position position;
  
     private static final Logger logger = LogManager.getLogger();
 
@@ -31,6 +31,7 @@ public class Maze {
 
         entryAndExit = new EntryAndExit(maze, rows, cols);
         setStartAndEndCoordinates();
+        position = new Position(getStartCoordinate());
     }
 
     private void setStartAndEndCoordinates(){
@@ -45,9 +46,27 @@ public class Maze {
     public String getEndCoordinate(){
         return endCoordinate;
     }
+    public String getCurrentCoordinate(){
+        return position.getCurrentCoordinate();
+    }
 
     public char[][] getMaze(){
         return maze;
+    }
+
+    public boolean reachedEndOfMaze(){
+        boolean reachedEnd = position.reachedEnd(getEndCoordinate());
+        return reachedEnd;
+    }
+
+    public void setNewCoordinates(String nextCoordinate, String stepTaken){
+        position.setCurrentCoordinate(nextCoordinate); // set as new current coordinate
+        position.addStepToPath(stepTaken);
+    }
+
+    public void printPaths(){
+        System.out.println("Printing canonical path");
+        position.printCanonicalPath();
     }
 
     private void createMaze(){
@@ -63,6 +82,7 @@ public class Maze {
                 }
                 row++;
             }
+            reader.close();
         } catch (IOException e) {
             logger.error("/!\\ An error has occured /!\\");
         }
