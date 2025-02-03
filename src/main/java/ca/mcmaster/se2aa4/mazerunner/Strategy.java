@@ -1,23 +1,27 @@
-package main.java.ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.text.ParseException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.commons.cli.*;
+import java.util.*;
 
 public abstract class Strategy {
 
-    protected int currentXIndex;
+   protected int currentXIndex;
     protected int currentYIndex;
-    protected String stepTaken;
+    protected List<String> stepsTaken;
+    protected Direction direction;
 
-    protected Strategy(String coordinate){
+   protected Strategy(String coordinate){
         setCurrentXAndYIndex(coordinate);
-        stepTaken = null;
+        stepsTaken = new ArrayList<>();
+        direction = Direction.EAST;
+    }
+
+    // MOVE ENUM
+    public enum Direction {
+        NORTH, SOUTH, EAST, WEST;
+    }
+
+    protected Direction getCurrentDirection(){
+        return direction;
     }
 
     protected void setCurrentXAndYIndex(String coordinate){
@@ -32,13 +36,15 @@ public abstract class Strategy {
         return currentYIndex;
     }
     protected void setStepTaken(String stepTaken){
-        this.stepTaken = stepTaken;
+        this.stepsTaken.add(stepTaken);
     }
-    public String getStepTaken(){
-        return stepTaken;
+    public void emptyListOfSteps(){
+        stepsTaken.clear();
     }
-
-    public abstract String decideNextMove(char[][] maze, String coordinate);
+    public List<String> getStepsTaken(){
+        return stepsTaken;
+    }
+    public abstract String decideNextMove(char[][] maze, String coordinate, Direction direction);
 
 }
 

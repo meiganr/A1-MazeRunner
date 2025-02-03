@@ -1,13 +1,11 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.*; 
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.commons.cli.*;
+
 
  //import main.java.ca.mcmaster.se2aa4.mazerunner.EntryAndExit;
 
@@ -59,9 +57,9 @@ public class Maze {
         return reachedEnd;
     }
 
-    public void setNewCoordinates(String nextCoordinate, String stepTaken){
+    public void setNewCoordinates(String nextCoordinate, List<String> stepsTaken){
         position.setCurrentCoordinate(nextCoordinate); // set as new current coordinate
-        position.addStepToPath(stepTaken);
+        position.addStepsToPath(stepsTaken);
     }
 
     public void printPaths(){

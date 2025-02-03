@@ -1,13 +1,7 @@
-package main.java.ca.mcmaster.se2aa4.mazerunner;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.text.ParseException;
+package ca.mcmaster.se2aa4.mazerunner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.commons.cli.*;
 import java.util.*; 
 
 public class Position {
@@ -38,15 +32,17 @@ public class Position {
         return currentCoordinate;
     }
 
-    public void addStepToPath(String stepTaken){
-         if (stepTaken.equals("FORWARD")){
-            canonicalPath.add("F");
-        }
-        else if (stepTaken.equals("TURN RIGHT")){
-            canonicalPath.add("R");
-        }
-        else if (stepTaken.equals("TURN LEFT")){
-            canonicalPath.add("L");
+    public void addStepsToPath(List<String> stepsTaken){
+        for (String step : stepsTaken){
+            if (step.equals("FORWARD")){
+                canonicalPath.add("F");
+            }
+            else if (step.equals("TURN RIGHT")){
+                canonicalPath.add("R");
+            }
+            else if (step.equals("TURN LEFT")){
+                canonicalPath.add("L");
+            }
         }
     }
     public void makeFactorizedPath(){

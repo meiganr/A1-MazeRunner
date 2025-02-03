@@ -1,4 +1,4 @@
-package main.java.ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,7 +23,7 @@ public class StraightStrategy extends Strategy {
     }
     
     @Override
-    public String decideNextMove(char[][] maze, String coordinate) {
+    public String decideNextMove(char[][] maze, String coordinate, Direction direction) {
         String nextCoordinate = null;
 
         int x = getCurrentXIndex();
@@ -35,7 +35,6 @@ public class StraightStrategy extends Strategy {
             setCurrentXAndYIndex(nextCoordinate);
             setStepTaken("FORWARD");
         }
-
         return nextCoordinate;
 
     }
