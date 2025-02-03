@@ -82,4 +82,19 @@ public class Position {
     public void reversePath(){
 
     }
+
+    public boolean isInputPathLegit(String inputPath){
+        String pathAsString = ""; 
+        for (int i = 0; i < canonicalPath.size(); i++){
+            pathAsString += (canonicalPath.get(i));
+        }
+        System.out.println(pathAsString);
+
+        if (pathAsString.contains(inputPath)){
+            return true; 
+        }
+        else{
+            return false; 
+        }
+    }
 }

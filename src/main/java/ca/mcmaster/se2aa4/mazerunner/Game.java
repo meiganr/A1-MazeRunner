@@ -25,6 +25,7 @@ public class Game {
     private File mazeFile;
     private String nextCoordinate;
     private String currentCoordinate;
+    private String inputPath; 
 
     public Game(String[] args, int strategyOption){
         makeMaze(args);
@@ -36,18 +37,29 @@ public class Game {
             strategy = new StraightStrategy(maze.getStartCoordinate());
         }
         runMaze(); 
+
     }
 
     private void makeMaze(String[] args){
+        
         logger.info("** Starting Maze Runner\n");
 
           Options options = new Options();
           CommandLineParser parser = new DefaultParser();
           options.addOption("i", true, "the provided maze's path from file");
+          options.addOption("p", true, "a path to be verified for the given maze file"); 
 
         try{
             CommandLine cmd = parser.parse(options, args);
             mazeName = cmd.getOptionValue("i"); 
+
+            if (cmd.hasOption("p")){
+                inputPath = cmd.getOptionValue("p"); 
+            }
+            else{
+                inputPath = ""; 
+            }
+            
             logger.info("**** Reading the maze from file " + mazeName);
             System.out.println("Maze File: " + mazeName); 
 
@@ -107,6 +119,13 @@ public class Game {
         logger.info("**** Computing path");
         System.out.println("Printing paths");
         maze.printPaths();
+
+
+        // verify that input path is legit
+        if (inputPath.isEmpty() == false){
+            maze.verifyInputPath(inputPath); 
+        }
+    
         
         logger.debug("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");

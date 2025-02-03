@@ -69,6 +69,17 @@ public class Maze {
         position.makeFactorizedPath();
         position.printFactorizedPath();
     }
+    public void verifyInputPath(String inputPath){
+        boolean legitInputPath = position.isInputPathLegit(inputPath); 
+
+        if (legitInputPath){
+            System.out.println("The path " + inputPath + " is accepted for the provided maze");
+        }
+        else{
+            System.out.println("The path " + inputPath + " is not accepted for the provided maze");
+        }
+
+    }
 
     private void createMaze(){
         try {
