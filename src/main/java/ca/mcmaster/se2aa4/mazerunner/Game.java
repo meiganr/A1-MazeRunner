@@ -49,6 +49,7 @@ public class Game {
             CommandLine cmd = parser.parse(options, args);
             mazeName = cmd.getOptionValue("i"); 
             logger.info("**** Reading the maze from file " + mazeName);
+            System.out.println("Maze File: " + mazeName); 
 
 
             mazeFile = new File(mazeName);
@@ -103,7 +104,6 @@ public class Game {
             currentCoordinate = maze.getCurrentCoordinate();
 
         }
-
         logger.info("**** Computing path");
         System.out.println("Printing paths");
         maze.printPaths();
@@ -114,7 +114,7 @@ public class Game {
 
 
     public static void main(String[] args) {
-        Game g = new Game(args,1);
+        new Game(args,1);
     
     }
 }

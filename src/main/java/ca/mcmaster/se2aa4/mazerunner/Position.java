@@ -1,20 +1,19 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.util.*; 
 
 public class Position {
-    private static final Logger logger = LogManager.getLogger();
+   
 
     private String currentCoordinate;
-    private ArrayList<String> canonicalPath;
-    private String factorizedPath;
-    private String reversedPath;
+    private List<String> canonicalPath;
+    private StringBuffer factorizedPath;
+    private List<String> reversedPath;
 
     public Position(String coordinate){
         currentCoordinate = coordinate;
         canonicalPath = new ArrayList<>();
+        factorizedPath = new StringBuffer();
     }
     
     // checked if reached the end of the maze
@@ -46,10 +45,32 @@ public class Position {
         }
     }
     public void makeFactorizedPath(){
-        
+        int count = 1;
+        int sizeOfPath = canonicalPath.size();
+
+        for (int i = 1; i < sizeOfPath; i++){
+
+            if (canonicalPath.get(i) == canonicalPath.get(i - 1)){
+                count++;
+            }
+            else{ // add the factorized part to the factorized path
+                if (count > 1){
+                    factorizedPath.append(count + canonicalPath.get(i - 1) + " ");
+                }
+                else {
+                    factorizedPath.append(canonicalPath.get(i - 1) + " ") ;
+                }
+                count = 1;
+            }
+        }
+
+        if (count > 1)
+            factorizedPath.append(count + canonicalPath.get(sizeOfPath - 1));
+        else
+            factorizedPath.append(canonicalPath.get(sizeOfPath - 1));
     }
     public void printFactorizedPath(){
-        
+        System.out.println(factorizedPath.toString());
     }
     public void printCanonicalPath(){
         

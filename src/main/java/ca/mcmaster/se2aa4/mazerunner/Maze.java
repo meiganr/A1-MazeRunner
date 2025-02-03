@@ -65,6 +65,9 @@ public class Maze {
     public void printPaths(){
         System.out.println("Printing canonical path");
         position.printCanonicalPath();
+        System.out.println("\nPrinting factorized path");
+        position.makeFactorizedPath();
+        position.printFactorizedPath();
     }
 
     private void createMaze(){
@@ -84,6 +87,7 @@ public class Maze {
         } catch (IOException e) {
             logger.error("/!\\ An error has occured /!\\");
         }
+        System.out.println("The Maze:"); 
         printMaze(); 
     }
     
@@ -94,5 +98,6 @@ public class Maze {
             }
             System.out.println(' ');
         }
+        System.out.println();
     }
 }
