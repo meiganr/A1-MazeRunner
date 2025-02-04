@@ -1,25 +1,11 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.text.ParseException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.commons.cli.*;
-import java.util.*; 
-
-
-
 public class StraightStrategy extends Strategy {
 
-    private static final Logger logger = LogManager.getLogger();
 
     
-    public StraightStrategy(String coordinates){
-        super(coordinates);
-
+    public StraightStrategy(String coordinates, Direction startingDirection){
+        super(coordinates, startingDirection);
     }
     
     @Override

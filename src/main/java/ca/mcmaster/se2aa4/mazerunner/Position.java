@@ -8,7 +8,6 @@ public class Position {
     private String currentCoordinate;
     private List<String> canonicalPath;
     private StringBuffer factorizedPath;
-    private List<String> reversedPath;
 
     public Position(String coordinate){
         currentCoordinate = coordinate;
@@ -79,10 +78,7 @@ public class Position {
         }
         System.out.println(); 
     }
-    public void reversePath(){
-
-    }
-
+    
     public boolean isInputPathLegit(String inputPath){
         String pathAsString = ""; 
         for (int i = 0; i < canonicalPath.size(); i++){

@@ -9,10 +9,6 @@ import java.io.FileReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// import main.java.ca.mcmaster.se2aa4.mazerunner.Maze;
-// import main.java.ca.mcmaster.se2aa4.mazerunner.Strategy;
-// import main.java.ca.mcmaster.se2aa4.mazerunner.Position;
-
 import org.apache.commons.cli.*;
 
 public class Game {
@@ -27,20 +23,20 @@ public class Game {
     private String currentCoordinate;
     private String inputPath; 
 
-    public Game(String[] args, int strategyOption){
-        makeMaze(args);
+    public Game(String[] args, int strategyOption, String orientation){
+        makeMaze(args, orientation);
 
         if (strategyOption == 1){
-            strategy = new RightHandStrategy(maze.getStartCoordinate());
+            strategy = new RightHandStrategy(maze.getMazeEntrance(), maze.getStartingDirection());
         }
         else if (strategyOption == 2){
-            strategy = new StraightStrategy(maze.getStartCoordinate());
+            strategy = new StraightStrategy(maze.getMazeEntrance(), maze.getStartingDirection());
         }
         runMaze(); 
 
     }
 
-    private void makeMaze(String[] args){
+    private void makeMaze(String[] args, String orientation){
         
         logger.info("** Starting Maze Runner\n");
 
@@ -83,22 +79,22 @@ public class Game {
             logger.debug(cols);
             
             // create Maze object
-            maze = new Maze(mazeFile, rows, cols);
+            maze = new Maze(mazeFile, rows, cols, orientation);
             
-
+            reader.close();
         } catch(Exception e) {
             logger.error("/!\\ An error has occurred /!\\");
         }
 
-        logger.debug(maze.getStartCoordinate());
-        logger.debug(maze.getEndCoordinate());
+        logger.debug(maze.getEastCoordinate());
+        logger.debug(maze.getWestCoordinate());
     }
 
 
 
     private void runMaze(){
         currentCoordinate = maze.getCurrentCoordinate();
-        Strategy.Direction currentDirection = strategy.getCurrentDirection();
+        Direction currentDirection = maze.getStartingDirection(); 
 
 
         while (maze.reachedEndOfMaze() == false){
@@ -116,6 +112,9 @@ public class Game {
             currentCoordinate = maze.getCurrentCoordinate();
 
         }
+
+
+
         logger.info("**** Computing path");
         System.out.println("Printing paths");
         maze.printPaths();
@@ -127,13 +126,12 @@ public class Game {
         }
     
         
-        logger.debug("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
     }
 
 
     public static void main(String[] args) {
-        new Game(args,1);
+        new Game(args,1, "east");
     
     }
 }

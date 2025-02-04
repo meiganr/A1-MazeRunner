@@ -6,46 +6,58 @@ import java.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
- //import main.java.ca.mcmaster.se2aa4.mazerunner.EntryAndExit;
-
 public class Maze {
     private File mazeFile;
     private char[][] maze;
 
-    private String startCoordinate;
-    private String endCoordinate;
+    private String eastCoordinate;
+    private String westCoordinate;
+    private Position position;
 
     EntryAndExit entryAndExit;
+    TraversalDirection traversalDirection;
 
-    private Position position;
  
     private static final Logger logger = LogManager.getLogger();
 
-    public Maze(File mazeFile, int rows, int cols){
+    public Maze(File mazeFile, int rows, int cols, String orientation) {
         this.mazeFile = mazeFile;
         maze = new char[rows][cols];
         createMaze();
-
         entryAndExit = new EntryAndExit(maze, rows, cols);
-        setStartAndEndCoordinates();
-        position = new Position(getStartCoordinate());
+        setEastAndWestCoordinates();
+
+        if (orientation.equals("east")){
+            traversalDirection = new EastToWest(getEastCoordinate(), getWestCoordinate());
+        }
+        else {
+            traversalDirection = new WestToEast(getEastCoordinate(), getWestCoordinate());
+        }
+
+        position = new Position(traversalDirection.getMazeEntrance());
+
+    }
+    public String getMazeEntrance(){
+        return traversalDirection.getMazeEntrance();
     }
 
-    private void setStartAndEndCoordinates(){
-        startCoordinate = entryAndExit.getEntryCoordinate();
-        endCoordinate = entryAndExit.getExitCoordinate();
+    private void setEastAndWestCoordinates(){
+        eastCoordinate = entryAndExit.getEastCoordinate();
+        westCoordinate = entryAndExit.getWestCoordinate();
     }
 
-    public String getStartCoordinate(){
-        return startCoordinate;
+    public String getEastCoordinate(){
+        return eastCoordinate;
     }
-    
-    public String getEndCoordinate(){
-        return endCoordinate;
+    public String getWestCoordinate(){
+        return westCoordinate;
     }
+
     public String getCurrentCoordinate(){
         return position.getCurrentCoordinate();
+    }
+    public Direction getStartingDirection(){
+        return traversalDirection.getStartingDirection();
     }
 
     public char[][] getMaze(){
@@ -53,7 +65,7 @@ public class Maze {
     }
 
     public boolean reachedEndOfMaze(){
-        boolean reachedEnd = position.reachedEnd(getEndCoordinate());
+        boolean reachedEnd = position.reachedEnd(traversalDirection.getMazeExit());
         return reachedEnd;
     }
 

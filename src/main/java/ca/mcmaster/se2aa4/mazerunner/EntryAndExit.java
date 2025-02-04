@@ -1,19 +1,9 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.ParseException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.commons.cli.*;
-
 public class EntryAndExit {
     private char[][] maze;
-    private String entryCoordinate;
-    private String exitCoordinate;
+    private String eastCoordinate;
+    private String westCoordinate;
     private int rows;
     private int cols;
 
@@ -29,26 +19,25 @@ public class EntryAndExit {
     private void findEntryCoordinate(){
         for (int i = 0; i < rows; i++){
             if (maze[i][0] == ' '){
-                entryCoordinate = String.valueOf(i);
+                eastCoordinate = String.valueOf(i);
             }
         }
-        entryCoordinate = entryCoordinate + ",0";
+        eastCoordinate = eastCoordinate + ",0";
     }
     private void findExitCoordinate(){
         for (int i = 0; i < rows; i++){
             if (maze[i][cols - 1] == ' '){
-                exitCoordinate = String.valueOf(i);
+                westCoordinate = String.valueOf(i);
             }
         }
-        exitCoordinate = exitCoordinate + "," + String.valueOf(cols - 1);
+        westCoordinate = westCoordinate + "," + String.valueOf(cols - 1);
     }
 
-    public String getEntryCoordinate(){
-        return entryCoordinate;
+    public String getEastCoordinate(){
+        return eastCoordinate;
     }
-    public String getExitCoordinate(){
-        return exitCoordinate;
+    public String getWestCoordinate(){
+        return westCoordinate;
     }
-
 
 }

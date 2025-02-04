@@ -3,9 +3,9 @@ package ca.mcmaster.se2aa4.mazerunner;
 public class RightHandStrategy extends Strategy{
 
     private String nextCoordinate;
-    
-    public RightHandStrategy(String coordinates){
-        super(coordinates);
+
+    public RightHandStrategy(String coordinates, Direction startingDirection){
+        super(coordinates, startingDirection);
         nextCoordinate = null;
     }
 

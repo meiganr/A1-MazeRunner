@@ -9,16 +9,16 @@ public abstract class Strategy {
     protected List<String> stepsTaken;
     protected Direction direction;
 
-   protected Strategy(String coordinate){
+    protected Strategy(String coordinate, Direction startingDirection){
         setCurrentXAndYIndex(coordinate);
         stepsTaken = new ArrayList<>();
-        direction = Direction.EAST;
+        direction = startingDirection;
     }
 
-    // MOVE ENUM
-    public enum Direction {
-        NORTH, SOUTH, EAST, WEST;
-    }
+    // // MOVE ENUM
+    // public enum Direction {
+    //     NORTH, SOUTH, EAST, WEST;
+    // }
 
     protected Direction getCurrentDirection(){
         return direction;
