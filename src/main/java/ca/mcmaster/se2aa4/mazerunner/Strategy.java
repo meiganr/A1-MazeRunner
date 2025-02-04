@@ -15,18 +15,14 @@ public abstract class Strategy {
         direction = startingDirection;
     }
 
-    // // MOVE ENUM
-    // public enum Direction {
-    //     NORTH, SOUTH, EAST, WEST;
-    // }
-
     protected Direction getCurrentDirection(){
         return direction;
     }
 
     protected void setCurrentXAndYIndex(String coordinate){
-        currentXIndex = Integer.parseInt(coordinate.substring(0,1));
-        currentYIndex = Integer.parseInt(coordinate.substring(2));
+        String[] xAndY = coordinate.split(",");
+        currentXIndex = Integer.parseInt(xAndY[0]);
+        currentYIndex = Integer.parseInt(xAndY[1]);
     }
    
     public int getCurrentXIndex(){
