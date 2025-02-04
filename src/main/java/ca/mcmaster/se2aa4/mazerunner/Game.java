@@ -2,10 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 // example with tiny maze file
 // to run: java -jar target/mazerunner.jar -i ./examples/tiny.maz.txt -p LL
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-
+import java.io.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,7 +20,7 @@ public class Game {
     private String currentCoordinate;
     private String inputPath; 
 
-    public Game(String[] args, int strategyOption, String orientation){
+    public Game(String[] args, int strategyOption, String orientation) throws Exception{
         makeMaze(args, orientation);
 
         if (strategyOption == 1){
@@ -36,7 +33,7 @@ public class Game {
 
     }
 
-    private void makeMaze(String[] args, String orientation){
+    private void makeMaze(String[] args, String orientation) throws Exception{
         
         logger.info("** Starting Maze Runner\n");
 
@@ -55,12 +52,22 @@ public class Game {
             else{
                 inputPath = ""; 
             }
+
+            // Check if no file was provided
+            if (mazeName == null || mazeName.equals("")) {
+                throw new IllegalArgumentException("Maze file path not provided.");
+            }
             
             logger.info("**** Reading the maze from file " + mazeName);
             System.out.println("Maze File: " + mazeName); 
 
-
             mazeFile = new File(mazeName);
+
+            // check if the file does not exist
+            if (!mazeFile.exists()){
+                throw new FileNotFoundException("The maze file " + mazeName + " does not exist");
+            }
+            
             BufferedReader reader = new BufferedReader(new FileReader(mazeFile));
 
             // finding rows and cols in provided mazeFile to create Maze
@@ -82,14 +89,14 @@ public class Game {
             maze = new Maze(mazeFile, rows, cols, orientation);
             
             reader.close();
-        } catch(Exception e) {
+        } catch(Exception e) { 
             logger.error("/!\\ An error has occurred /!\\");
+            throw new Exception(e); 
         }
 
         logger.debug(maze.getEastCoordinate());
         logger.debug(maze.getWestCoordinate());
     }
-
 
 
     private void runMaze(){
@@ -129,7 +136,12 @@ public class Game {
 
 
     public static void main(String[] args) {
-        new Game(args,1, "east");
+        try{
+            new Game(args,1, "east");
+        }catch(Exception e){
+            System.out.println(e.getMessage()); 
+        }
+        
     
     }
 }
