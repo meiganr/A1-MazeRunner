@@ -85,10 +85,10 @@ public class Maze {
         boolean legitInputPath = position.isInputPathLegit(inputPath); 
 
         if (legitInputPath){
-            System.out.println("The path " + inputPath + " is accepted for the provided maze");
+            System.out.println("The path " + inputPath + " is accepted for " + mazeFile);
         }
         else{
-            System.out.println("The path " + inputPath + " is not accepted for the provided maze");
+            System.out.println("The path " + inputPath + " is not accepted for " + mazeFile);
         }
 
     }

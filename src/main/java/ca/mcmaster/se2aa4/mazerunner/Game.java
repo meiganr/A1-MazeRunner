@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
-
-// to run: java -jar target/mazerunner.jar -i ./examples/tiny.maz.txt
+// example with tiny maze file
+// to run: java -jar target/mazerunner.jar -i ./examples/tiny.maz.txt -p LL
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -112,8 +112,6 @@ public class Game {
             currentCoordinate = maze.getCurrentCoordinate();
 
         }
-
-
 
         logger.info("**** Computing path");
         System.out.println("Printing paths");

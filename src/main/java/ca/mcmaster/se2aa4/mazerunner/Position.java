@@ -1,9 +1,11 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.util.*; 
+import java.util.*;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger; 
 
 public class Position {
-   
 
     private String currentCoordinate;
     private List<String> canonicalPath;
@@ -68,9 +70,11 @@ public class Position {
         else
             factorizedPath.append(canonicalPath.get(sizeOfPath - 1));
     }
+
     public void printFactorizedPath(){
         System.out.println(factorizedPath.toString());
     }
+    
     public void printCanonicalPath(){
         
         for (int i = 0; i < canonicalPath.size(); i++){
@@ -84,7 +88,6 @@ public class Position {
         for (int i = 0; i < canonicalPath.size(); i++){
             pathAsString += (canonicalPath.get(i));
         }
-        System.out.println(pathAsString);
 
         if (pathAsString.contains(inputPath)){
             return true; 
