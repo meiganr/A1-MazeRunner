@@ -2,40 +2,12 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class RightHandStrategy extends Strategy{
 
-    private String nextCoordinate;
-
     public RightHandStrategy(String coordinates, Direction startingDirection){
         super(coordinates, startingDirection);
-        nextCoordinate = null;
     }
-
 
     @Override
-    public String decideNextMove(char[][] maze, String coordinate, Direction direction){
-        nextCoordinate = coordinate;
-        this.direction = direction; // sets the direction
-
-        int x = getCurrentXIndex();
-        int y = getCurrentYIndex();
-
-        if (this.direction == Direction.EAST){
-            movePointingEast(maze, x, y);
-        }
-        else if (this.direction == Direction.NORTH){
-            movePointingNorth(maze, x, y);
-        }
-        else if (this.direction == Direction.SOUTH){
-            movePointingSouth(maze, x, y);
-        }
-        else{ // if direction is West
-            movePointingWest(maze, x, y);
-        }
-
-        return nextCoordinate;
-
-    }
-
-    private void movePointingWest(char[][] maze, int x, int y){
+    protected void movePointingWest(char[][] maze, int x, int y){
         if (maze[x - 1][y] == '#'){ // if there is wall on right
             if (maze[x][y - 1] == ' ') {// if no wall in front
                 // move forward
@@ -58,9 +30,11 @@ public class RightHandStrategy extends Strategy{
             setCurrentXAndYIndex(nextCoordinate);
             setStepTaken("FORWARD");
         }
+        updateNextCoordinate(nextCoordinate);
     }
 
-    private void movePointingSouth(char[][] maze, int x, int y){
+    @Override
+    protected void movePointingSouth(char[][] maze, int x, int y){
         if (maze[x][y - 1] == '#'){ // if there is wall on right
             if (maze[x+1][y] == ' ') {// if no wall in front
                 // move forward
@@ -83,8 +57,11 @@ public class RightHandStrategy extends Strategy{
             setCurrentXAndYIndex(nextCoordinate);
             setStepTaken("FORWARD");
         }
+        updateNextCoordinate(nextCoordinate);
     }
-    private void movePointingNorth(char[][] maze, int x, int y){
+
+    @Override
+    protected void movePointingNorth(char[][] maze, int x, int y){
         if (maze[x][y + 1] == '#'){ // if there is wall on right
             if (maze[x-1][y] == ' ') {// if no wall in front
                 // move forward
@@ -107,9 +84,11 @@ public class RightHandStrategy extends Strategy{
             setCurrentXAndYIndex(nextCoordinate);
             setStepTaken("FORWARD");
         }
+        updateNextCoordinate(nextCoordinate);
     }
 
-    private void movePointingEast(char[][] maze, int x, int y){
+    @Override
+    protected void movePointingEast(char[][] maze, int x, int y){
         if (maze[x + 1][y] == '#'){ // if there is a wall on the right
 
             if (maze[x][y + 1] == ' '){ // if there is no wall in front
@@ -133,6 +112,7 @@ public class RightHandStrategy extends Strategy{
             setCurrentXAndYIndex(nextCoordinate);
             setStepTaken("FORWARD");
         }
+        updateNextCoordinate(nextCoordinate);
     }
 }
 
