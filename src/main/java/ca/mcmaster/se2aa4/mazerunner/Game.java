@@ -18,17 +18,13 @@ public class Game {
     private File mazeFile;
     private String nextCoordinate;
     private String currentCoordinate;
-    private String inputPath; 
+    private String inputPath;  
 
-    public Game(String[] args, int strategyOption, String orientation) throws Exception{
+    public Game(String[] args, StrategyType strategyOption, String orientation) throws Exception{
         makeMaze(args, orientation);
+        StrategyFactory strategyFactory = new StrategyFactory(); 
+        strategy = strategyFactory.getStrategy(strategyOption, maze.getMazeEntrance(), maze.getStartingDirection());
 
-        if (strategyOption == 1){
-            strategy = new RightHandStrategy(maze.getMazeEntrance(), maze.getStartingDirection());
-        }
-        else if (strategyOption == 2){
-            strategy = new StraightStrategy(maze.getMazeEntrance(), maze.getStartingDirection());
-        }
         runMaze(); 
 
     }
@@ -136,8 +132,9 @@ public class Game {
 
 
     public static void main(String[] args) {
+        StrategyType strategyName = StrategyType.RIGHT_HAND;
         try{
-            new Game(args,1, "east");
+            new Game(args,strategyName, "east");
         }catch(Exception e){
             System.out.println(e.getMessage()); 
         }
