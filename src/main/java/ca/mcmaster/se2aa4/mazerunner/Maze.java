@@ -16,24 +16,21 @@ public class Maze {
 
     EntryAndExit entryAndExit;
     TraversalDirection traversalDirection;
+    TraversalDirectionFactory traversalDirectionFactory; 
 
  
     private static final Logger logger = LogManager.getLogger();
 
     public Maze(File mazeFile, int rows, int cols, String orientation) {
+        traversalDirectionFactory = new TraversalDirectionFactory();
         this.mazeFile = mazeFile;
         maze = new char[rows][cols];
+
         createMaze();
         entryAndExit = new EntryAndExit(maze, rows, cols);
         setEastAndWestCoordinates();
 
-        if (orientation.equals("east")){
-            traversalDirection = new EastToWest(getEastCoordinate(), getWestCoordinate());
-        }
-        else {
-            traversalDirection = new WestToEast(getEastCoordinate(), getWestCoordinate());
-        }
-
+        traversalDirection = traversalDirectionFactory.getTraversalDirection(orientation, getEastCoordinate(), getWestCoordinate());
         position = new Position(traversalDirection.getMazeEntrance());
 
     }
