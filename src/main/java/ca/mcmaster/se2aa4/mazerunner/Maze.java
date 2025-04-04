@@ -110,8 +110,8 @@ public class Maze {
         } catch (IOException e) {
             logger.error("/!\\ An error has occured /!\\");
         }
-        System.out.println("The Maze:"); 
-        printMaze(); 
+        //System.out.println("The Maze:"); 
+        //printMaze(); 
     }
     
     private void printMaze(){

@@ -59,7 +59,7 @@ public class Game {
             }
             
             logger.info("**** Reading the maze from file " + mazeName);
-            System.out.println("Maze File: " + mazeName); 
+            //System.out.println("Maze File: " + mazeName); 
 
             mazeFile = new File(mazeName);
 
