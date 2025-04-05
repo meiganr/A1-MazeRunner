@@ -187,7 +187,4 @@ public class PathTest {
         assertEquals(expectedFactorizedPath, actualFactorizedPath);
     }
 
-
-
-
 }

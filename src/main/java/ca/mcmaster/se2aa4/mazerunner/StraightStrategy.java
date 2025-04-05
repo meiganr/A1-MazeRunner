@@ -12,6 +12,7 @@ public class StraightStrategy extends Strategy {
             nextCoordinate = x + "," + (y + 1);
             setCurrentXAndYIndex(nextCoordinate);
             setStepTaken("FORWARD");
+            updateNextCoordinate(nextCoordinate);
         }
     }
     protected void movePointingNorth(char[][] maze, int x, int y){
@@ -27,6 +28,7 @@ public class StraightStrategy extends Strategy {
             nextCoordinate = x + "," + (y - 1);
             setCurrentXAndYIndex(nextCoordinate);
             setStepTaken("FORWARD");
+            updateNextCoordinate(nextCoordinate);
         }
     }
 }

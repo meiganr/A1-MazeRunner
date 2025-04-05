@@ -8,6 +8,7 @@ import java.io.File;
 
 class MazeTest {
     @Test
+    
     void testSmallMazeEastEntrance(){
         File mazeFile = new File("examples/small.maz.txt"); 
         int rows = 11; 
